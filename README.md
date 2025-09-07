@@ -18,12 +18,12 @@ Throughout the project, I applied:
 ### 📂 Repository Contents
 | File                                              | Description                                                                                             |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `jupyter-labs-spacex-data-collection-api.ipynb`   | Collects SpaceX launch data using the SpaceX API.                                                       |
-| `jupyter-labs-webscraping.ipynb`                  | Scrapes Falcon 9 launch records from Wikipedia for additional data.                                     |
-| `jupyter-labs-eda-sql-coursera_sqllite.ipynb`     | Explores data using SQL queries on a SQLite database.                                                   |
-| `lab_jupyter_launch_site_location.ipynb`          | Performs geospatial analysis and visualizes launch site locations.                                      |
-| `spacex-dash-app.py`                              | Dash application that provides an interactive dashboard for SpaceX launch analysis.                     |
-| `SpaceX_Machine Learning Prediction_Part_5.ipynb` | Builds and evaluates classification models (Logistic Regression, SVM, etc.) to predict landing success. |
+| [`jupyter-labs-spacex-data-collection-api.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/4b569ed735f5acccfa6c5e74be72eba724de007e/jupyter-labs-spacex-data-collection-api.ipynb)   | Collects SpaceX launch data using the SpaceX API.                                                       |
+| [`jupyter-labs-webscraping.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/4b569ed735f5acccfa6c5e74be72eba724de007e/jupyter-labs-webscraping.ipynb)                  | Scrapes Falcon 9 launch records from Wikipedia for additional data.                                     |
+| [`jupyter-labs-eda-sql-coursera_sqllite.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/4b569ed735f5acccfa6c5e74be72eba724de007e/jupyter-labs-eda-sql-coursera_sqllite.ipynb)     | Explores data using SQL queries on a SQLite database.                                                   |
+| [`lab_jupyter_launch_site_location.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/4b569ed735f5acccfa6c5e74be72eba724de007e/lab_jupyter_launch_site_location.ipynb)          | Performs geospatial analysis and visualizes launch site locations.                                      |
+| [`spacex-dash-app.py`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/4b569ed735f5acccfa6c5e74be72eba724de007e/spacex-dash-app.py)                              | Dash application that provides an interactive dashboard for SpaceX launch analysis.                     |
+| [`SpaceX_Machine Learning Prediction_Part_5.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/274c81923dccea78b837a883f6c7700719544f15/SpaceX_Machine%20Learning%20Prediction_Part_5.ipynb) | Builds and evaluates classification models (Logistic Regression, SVM, etc.) to predict landing success. |
 
 ### 🚀 Technologies Used
 
