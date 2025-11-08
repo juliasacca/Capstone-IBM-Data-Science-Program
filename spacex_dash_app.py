@@ -115,9 +115,11 @@ def get_scatter_chart(entered_site, entered_payload):
                                 (spacex_df['Payload Mass (kg)'] <= high)]
 
 
+    filtered_df['class_label'] = filtered_df['class'].map({0: 'Failure', 1: 'Success'})
+
     fig = px.scatter(filtered_df,
                      x='Payload Mass (kg)',
-                     y='class',
+                     y='class_label',
                      color='Booster Version Category',
                      title="Correlation between Payload and Launch Success",
                      color_discrete_map={
@@ -128,4 +130,6 @@ def get_scatter_chart(entered_site, entered_payload):
                         'B5': '#c0504d'
                       }
                     )
+    fig.update_yaxes(title_text='Launch Result')
+  
     return fig
