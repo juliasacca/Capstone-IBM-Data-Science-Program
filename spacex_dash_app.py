@@ -115,10 +115,11 @@ def get_scatter_chart(entered_site, entered_payload):
                      color='Booster Version Category',
                      title="Correlation between Payload and Launch Success"
                      color_discrete_map={
-                        'CCAFS LC-40': '#945F56',
-                        'VAFB SLC-4E', '#f39685',
-                        'KSC LC-39A', '#f2dacf',
-                        'CCAFS SLC-40', '#D6BCB7'
+                        'v1.0': '#945F56',
+                        'v1.1', '#f39685',
+                        'FT', '#f2dacf',
+                        'B4', '#D6BCB7',
+                        'B5', '#c0504d'
                       }
                     )
     return fig
