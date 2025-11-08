@@ -112,5 +112,5 @@ def get_scatter_chart(entered_site, entered_payload):
 
 
 # Run the app
-if __name__ == "__main__":
-    app.run(port=8051)
+#if __name__ == "__main__":
+    #app.run(port=8051)
