@@ -81,7 +81,13 @@ def get_pie_chart(entered_site):
                      names='Outcome',
                      title=f'Total Success vs Failure for site {entered_site}',
                      color='Outcome',
-                     color_discrete_map={'Success': 'green', 'Failure': 'red'})
+                     color_discrete_map={
+                        'CCAFS LC-40': '#945F56',
+                        'VAFB SLC-4E', '#f39685',
+                        'KSC LC-39A', '#f2dacf',
+                        'CCAFS SLC-40', '#D6BCB7'
+                      }
+                    )
         return fig
 
 
@@ -107,5 +113,12 @@ def get_scatter_chart(entered_site, entered_payload):
                      x='Payload Mass (kg)',
                      y='class',
                      color='Booster Version Category',
-                     title="Correlation between Payload and Launch Success")
+                     title="Correlation between Payload and Launch Success"
+                     color_discrete_map={
+                        'CCAFS LC-40': '#945F56',
+                        'VAFB SLC-4E', '#f39685',
+                        'KSC LC-39A', '#f2dacf',
+                        'CCAFS SLC-40', '#D6BCB7'
+                      }
+                    )
     return fig
