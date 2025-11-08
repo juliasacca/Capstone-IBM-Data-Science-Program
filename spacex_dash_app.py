@@ -67,7 +67,14 @@ def get_pie_chart(entered_site):
     if entered_site == 'ALL':
         fig = px.pie(spacex_df[spacex_df['class'] == 1],
                      names='Launch Site',
-                     title='Total Success Launches By Site')
+                     title='Total Success Launches By Site',
+                    color_discrete_map={
+                        'CCAFS LC-40': '#945F56',
+                        'VAFB SLC-4E': '#f39685',
+                        'KSC LC-39A': '#f2dacf',
+                        'CCAFS SLC-40': '#D6BCB7'
+                      }
+                    )
         return fig
     else:
         site_df = spacex_df[spacex_df['Launch Site'] == entered_site]
@@ -82,10 +89,8 @@ def get_pie_chart(entered_site):
                      title=f'Total Success vs Failure for site {entered_site}',
                      color='Outcome',
                      color_discrete_map={
-                        'CCAFS LC-40': '#945F56',
-                        'VAFB SLC-4E': '#f39685',
-                        'KSC LC-39A': '#f2dacf',
-                        'CCAFS SLC-40': '#D6BCB7'
+                       'Success': '#6a9c79',
+                       'Failure': '#c0504d'
                       }
                     )
         return fig
