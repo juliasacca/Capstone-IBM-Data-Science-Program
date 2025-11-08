@@ -109,8 +109,3 @@ def get_scatter_chart(entered_site, entered_payload):
                      color='Booster Version Category',
                      title="Correlation between Payload and Launch Success")
     return fig
-
-
-# Run the app
-#if __name__ == "__main__":
-    #app.run(port=8051)
