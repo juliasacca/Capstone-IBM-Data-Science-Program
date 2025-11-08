@@ -20,7 +20,7 @@ app = dash.Dash(__name__)
 # Create an app layout
 app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                         style={'textAlign': 'center', 'color': '#945F56',
-                                               'font-size': 40}),
+                                               'fontSize': 40}),
                                 # TASK 1: Add a dropdown list to enable Launch Site selection
                                 # The default select value is for ALL sites
                                 dcc.Dropdown(id='site-dropdown',
@@ -63,7 +63,8 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                                 },
                                                 tooltip={"placement": "bottom", "always_visible": True}
                                               ),
-
+                                #ADDITIONAL FEATURE: Add a marker for total success rate based on filtered metrics
+                                html.Div(id='payload-success-summary', style={'fontSize': 18, 'marginTop': 20}),
 
                                 # TASK 4: Add a scatter chart to show the correlation between payload and launch success
                                 html.Div(dcc.Graph(id='success-payload-scatter-chart')),
@@ -142,5 +143,31 @@ def get_scatter_chart(entered_site, entered_payload):
                       }
                     )
     fig.update_yaxes(title_text='Launch Result')
+
+  #ADDITIONAL FEATURE: Callback for total success rate based on filtered metrics
+  @app.callback(
+              Output('payload-success-summary', 'children'),
+              [Input('site-dropdown', 'value'),
+               Input('payload-slider', 'value')]
+              )
+
+  def update_payload_success_summary(entered_site, payload_range):
+      low, high = payload_range
+      
+      if entered_site == 'ALL':
+          filtered_df = spacex_df[(spacex_df['Payload Mass (kg)'] >= low) &
+                                  (spacex_df['Payload Mass (kg)'] <= high)]
+      else:
+          filtered_df = spacex_df[(spacex_df['Launch Site'] == entered_site) &
+                                  (spacex_df['Payload Mass (kg)'] >= low) &
+                                  (spacex_df['Payload Mass (kg)'] <= high)]
+      
+      if len(filtered_df) == 0:
+          return "No launches in this payload range."
+      
+      success_rate = filtered_df['class'].mean() * 100
+      total_launches = len(filtered_df)
+      return f"Success rate for {total_launches:,} launches in this payload range: {success_rate:.1f}%"
+
   
     return fig
