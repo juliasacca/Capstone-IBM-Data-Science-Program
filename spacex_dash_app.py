@@ -19,7 +19,7 @@ app = dash.Dash(__name__)
 
 # Create an app layout
 app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
-                                        style={'textAlign': 'center', 'color': '#503D36',
+                                        style={'textAlign': 'center', 'color': '#945F56',
                                                'font-size': 40}),
                                 # TASK 1: Add a dropdown list to enable Launch Site selection
                                 # The default select value is for ALL sites
@@ -68,7 +68,8 @@ def get_pie_chart(entered_site):
         fig = px.pie(spacex_df[spacex_df['class'] == 1],
                      names='Launch Site',
                      title='Total Success Launches By Site',
-                    color_discrete_map={
+                     color='Launch Site',
+                     color_discrete_map={
                         'CCAFS LC-40': '#945F56',
                         'VAFB SLC-4E': '#f39685',
                         'KSC LC-39A': '#f2dacf',
