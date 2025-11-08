@@ -143,31 +143,30 @@ def get_scatter_chart(entered_site, entered_payload):
                       }
                     )
     fig.update_yaxes(title_text='Launch Result')
+  
+    return fig
 
-  #ADDITIONAL FEATURE: Callback for total success rate based on filtered metrics
-  @app.callback(
+#ADDITIONAL FEATURE: Callback for total success rate based on filtered metrics
+@app.callback(
               Output('payload-success-summary', 'children'),
               [Input('site-dropdown', 'value'),
                Input('payload-slider', 'value')]
               )
 
-  def update_payload_success_summary(entered_site, payload_range):
-      low, high = payload_range
-      
-      if entered_site == 'ALL':
-          filtered_df = spacex_df[(spacex_df['Payload Mass (kg)'] >= low) &
-                                  (spacex_df['Payload Mass (kg)'] <= high)]
-      else:
-          filtered_df = spacex_df[(spacex_df['Launch Site'] == entered_site) &
-                                  (spacex_df['Payload Mass (kg)'] >= low) &
-                                  (spacex_df['Payload Mass (kg)'] <= high)]
-      
-      if len(filtered_df) == 0:
-          return "No launches in this payload range."
-      
-      success_rate = filtered_df['class'].mean() * 100
-      total_launches = len(filtered_df)
-      return f"Success rate for {total_launches:,} launches in this payload range: {success_rate:.1f}%"
-
-  
-    return fig
+def update_payload_success_summary(entered_site, payload_range):
+    low, high = payload_range
+    
+    if entered_site == 'ALL':
+        filtered_df = spacex_df[(spacex_df['Payload Mass (kg)'] >= low) &
+                                (spacex_df['Payload Mass (kg)'] <= high)]
+    else:
+        filtered_df = spacex_df[(spacex_df['Launch Site'] == entered_site) &
+                                (spacex_df['Payload Mass (kg)'] >= low) &
+                                (spacex_df['Payload Mass (kg)'] <= high)]
+    
+    if len(filtered_df) == 0:
+        return "No launches in this payload range."
+    
+    success_rate = filtered_df['class'].mean() * 100
+    total_launches = len(filtered_df)
+    return f"Success rate for {total_launches:,} launches in this payload range: {success_rate:.1f}%"
