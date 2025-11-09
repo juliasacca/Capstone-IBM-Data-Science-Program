@@ -1,0 +1,35 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+/* Set Raleway as the default font */
+body, html, .dash-graph, .dash-table-container {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Apply Amarante font to your titles */
+h1, h2, h3, .title {
+    font-family: 'Amarante', cursive;
+}
+
+.kpi-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    min-width: 150px;
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.kpi-label {
+    font-size: 14px;
+    color: #6e6e6e;
+    margin-bottom: 4px;
+}
+
+.kpi-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
