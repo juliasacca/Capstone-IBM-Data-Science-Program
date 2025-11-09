@@ -77,10 +77,9 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                 html.Br(),
                                 
                                 
-                                #ADDITIONAL FEATURE: Add a marker for total success rate based on filtered metrics
-                                html.Div(id='payload-success-summary', style={'fontSize': 18, 'marginTop': 20}),
+                                #ADDITIONAL FEATURE: Add KPI metrics for total success rate based on filtered metrics
+                                html.Div(id='success-rate-output', style={'marginTop': '20px'}),
 
-                                
 
                                 # TASK 4: Add a scatter chart to show the correlation between payload and launch success
                                 html.Div(dcc.Graph(id='success-payload-scatter-chart')),
@@ -201,50 +200,29 @@ def update_payload_success_summary(entered_site, payload_range, entered_booster)
     failures = total_launches - successes
     success_rate = (successes / total_launches) * 100
 
-    # KPI Card Layout
+    # KPI Cards using CSS classes
     return html.Div(
-        style={
-            "display": "flex",
-            "gap": "20px",
-            "marginTop": "15px",
-            "flexWrap": "wrap"
-        },
+        style={"display": "flex", "gap": "20px", "marginTop": "15px", "flexWrap": "wrap"},
         children=[
 
-            # --- Total Launches ---
-            html.Div(
-                style=kpi_card_style,
-                children=[
-                    html.Div("Total Launches", className="kpi-label"),
-                    html.Div(f"{total_launches:,}", className="kpi-value")
-                ]
-            ),
+            html.Div([
+                html.Div("Total Launches", className="kpi-label"),
+                html.Div(f"{total_launches:,}", className="kpi-value")
+            ], className="kpi-card"),
 
-            # --- Successes ---
-            html.Div(
-                style=kpi_card_style,
-                children=[
-                    html.Div("Successes", className="kpi-label"),
-                    html.Div(f"{successes:,}", className="kpi-value")
-                ]
-            ),
+            html.Div([
+                html.Div("Successes", className="kpi-label"),
+                html.Div(f"{successes:,}", className="kpi-value")
+            ], className="kpi-card"),
 
-            # --- Failures ---
-            html.Div(
-                style=kpi_card_style,
-                children=[
-                    html.Div("Failures", className="kpi-label"),
-                    html.Div(f"{failures:,}", className="kpi-value")
-                ]
-            ),
+            html.Div([
+                html.Div("Failures", className="kpi-label"),
+                html.Div(f"{failures:,}", className="kpi-value")
+            ], className="kpi-card"),
 
-            # --- Success Rate ---
-            html.Div(
-                style=kpi_card_style,
-                children=[
-                    html.Div("Success Rate", className="kpi-label"),
-                    html.Div(f"{success_rate:.1f}%", style={**kpi_value_style, "color": rate_color})
-                ]
-            )
+            html.Div([
+                html.Div("Success Rate", className="kpi-label"),
+                html.Div(f"{success_rate:.1f}%", className="kpi-value")
+            ], className="kpi-card")
         ]
     )
