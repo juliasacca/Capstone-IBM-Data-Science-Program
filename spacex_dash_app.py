@@ -63,8 +63,24 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                                 },
                                                 tooltip={"placement": "bottom", "always_visible": True}
                                               ),
+
+                                #ADDITIONAL FEATURE:Booster Dropdown
+                                html.Label("Booster Version:"),
+                                dcc.Dropdown(
+                                    id='booster-dropdown',
+                                    options=[{'label': 'All Boosters', 'value': 'ALL'}] +
+                                            [{'label': b, 'value': b} for b in spacex_df['Booster Version Category'].unique()],
+                                    value='ALL',
+                                    clearable=False,
+                                    searchable=True
+                                ),
+                                html.Br(),
+                                
+                                
                                 #ADDITIONAL FEATURE: Add a marker for total success rate based on filtered metrics
                                 html.Div(id='payload-success-summary', style={'fontSize': 18, 'marginTop': 20}),
+
+                                
 
                                 # TASK 4: Add a scatter chart to show the correlation between payload and launch success
                                 html.Div(dcc.Graph(id='success-payload-scatter-chart')),
@@ -115,16 +131,19 @@ def get_pie_chart(entered_site):
 # Add a callback function for `site-dropdown` and `payload-slider` as inputs, `success-payload-scatter-chart` as output
 @app.callback(Output('success-payload-scatter-chart', 'figure'),
               [Input('site-dropdown', 'value'),
-               Input('payload-slider', 'value')])
-def get_scatter_chart(entered_site, entered_payload):
+               Input('payload-slider', 'value'),
+               Input('booster-dropdown', 'value')])
+def get_scatter_chart(entered_site, entered_payload, entered_booster):
     low, high = entered_payload
-    if entered_site == 'ALL':
-        filtered_df = spacex_df[(spacex_df['Payload Mass (kg)'] >= low) &
-                                (spacex_df['Payload Mass (kg)'] <= high)]
-    else:
-        filtered_df = spacex_df[(spacex_df['Launch Site'] == entered_site) &
-                                (spacex_df['Payload Mass (kg)'] >= low) &
-                                (spacex_df['Payload Mass (kg)'] <= high)]
+
+    filtered_df = spacex_df[(spacex_df['Payload Mass (kg)'] >= low) &
+                            (spacex_df['Payload Mass (kg)'] <= high)]
+  
+    if entered_site != 'ALL':
+        filtered_df = filtered_df[filtered_df['Launch Site'] == entered_site]
+      
+    if entered_booster != 'ALL':
+        filtered_df = filtered_df[filtered_df['Booster Version Category'] == entered_booster]
 
 
     filtered_df['class_label'] = filtered_df['class'].map({0: 'Failure', 1: 'Success'})
@@ -146,27 +165,86 @@ def get_scatter_chart(entered_site, entered_payload):
   
     return fig
 
-#ADDITIONAL FEATURE: Callback for total success rate based on filtered metrics
+# ADDITIONAL FEATURE: Callback for total success rate based on filtered metrics
 @app.callback(
-              Output('payload-success-summary', 'children'),
-              [Input('site-dropdown', 'value'),
-               Input('payload-slider', 'value')]
-              )
-
-def update_payload_success_summary(entered_site, payload_range):
+    Output('success-rate-output', 'children'),
+    [
+        Input('site-dropdown', 'value'),
+        Input('payload-slider', 'value'),
+        Input('booster-dropdown', 'value')
+    ]
+)
+def update_payload_success_summary(entered_site, payload_range, entered_booster):
     low, high = payload_range
-    
-    if entered_site == 'ALL':
-        filtered_df = spacex_df[(spacex_df['Payload Mass (kg)'] >= low) &
-                                (spacex_df['Payload Mass (kg)'] <= high)]
-    else:
-        filtered_df = spacex_df[(spacex_df['Launch Site'] == entered_site) &
-                                (spacex_df['Payload Mass (kg)'] >= low) &
-                                (spacex_df['Payload Mass (kg)'] <= high)]
-    
-    if len(filtered_df) == 0:
-        return "No launches in this payload range."
-    
-    success_rate = filtered_df['class'].mean() * 100
+
+    # Apply payload filter
+    filtered_df = spacex_df[
+        (spacex_df['Payload Mass (kg)'] >= low) &
+        (spacex_df['Payload Mass (kg)'] <= high)
+    ]
+
+    # Apply site filter
+    if entered_site != 'ALL':
+        filtered_df = filtered_df[filtered_df['Launch Site'] == entered_site]
+
+    # Apply booster filter
+    if entered_booster != 'ALL':
+        filtered_df = filtered_df[filtered_df['Booster Version Category'] == entered_booster]
+
+    # Handle cases with no launches
     total_launches = len(filtered_df)
-    return f"Success rate for {total_launches:,} launches in this payload range: {success_rate:.1f}%"
+    if total_launches == 0:
+        return html.Div("No launches found for this selection.")
+
+    # Final calculations
+    successes = filtered_df['class'].sum()
+    failures = total_launches - successes
+    success_rate = (successes / total_launches) * 100
+
+    # KPI Card Layout
+    return html.Div(
+        style={
+            "display": "flex",
+            "gap": "20px",
+            "marginTop": "15px",
+            "flexWrap": "wrap"
+        },
+        children=[
+
+            # --- Total Launches ---
+            html.Div(
+                style=kpi_card_style,
+                children=[
+                    html.Div("Total Launches", className="kpi-label"),
+                    html.Div(f"{total_launches:,}", className="kpi-value")
+                ]
+            ),
+
+            # --- Successes ---
+            html.Div(
+                style=kpi_card_style,
+                children=[
+                    html.Div("Successes", className="kpi-label"),
+                    html.Div(f"{successes:,}", className="kpi-value")
+                ]
+            ),
+
+            # --- Failures ---
+            html.Div(
+                style=kpi_card_style,
+                children=[
+                    html.Div("Failures", className="kpi-label"),
+                    html.Div(f"{failures:,}", className="kpi-value")
+                ]
+            ),
+
+            # --- Success Rate ---
+            html.Div(
+                style=kpi_card_style,
+                children=[
+                    html.Div("Success Rate", className="kpi-label"),
+                    html.Div(f"{success_rate:.1f}%", style={**kpi_value_style, "color": rate_color})
+                ]
+            )
+        ]
+    )
