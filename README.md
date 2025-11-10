@@ -32,7 +32,7 @@ Throughout the project, I applied:
 * **APIs & Web Scraping:** Requests, BeautifulSoup
 * **Databases:** SQLite, SQL queries
 * **Machine Learning:** Scikit-learn (Logistic Regression, SVM, GridSearchCV)
-* **Dashboard:** Dash / Plotly
+* **Dashboard:** Dash, Plotly, Heroku
 * Jupyter Notebooks
 
 ### 📈 Results
@@ -43,6 +43,11 @@ Throughout the project, I applied:
 
 –  Created an interactive dashboard which allows dynamic exploration of launch success by site, payload, and orbit.
 
+### 👔 Presentation
+[`Interactive Dashboard`](https://spacex-dash-app-e395ca8c9927.herokuapp.com/)
+
+[`Link to Presentation`](https://docs.google.com/presentation/d/e/2PACX-1vS0SefwrPcUAjoHdEHUtogVKzGJiqM8CW-lqRCCFC_PgEFRMytoHZgDP6VIb2Q6P3P8qCSqfwVdzIq2/pub?start=false&loop=false&delayms=3000)
+
 
 #### 📜 Acknowledgements
-_This project was completed as part of the Applied Data Science Capstone within the IBM Data Science Professional Certificate, and accessed through Coursera ._
+_This project was completed as part of the Applied Data Science Capstone within the IBM Data Science Professional Certificate, and accessed through Coursera._
