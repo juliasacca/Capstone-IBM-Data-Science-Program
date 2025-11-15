@@ -22,9 +22,9 @@ Throughout the project, I applied:
 | [`SpaceX-Webscraping.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-Webscraping.ipynb)                  | Scrapes Falcon 9 launch records from Wikipedia for additional data.                                     |
 | [`SpaceX-Data-Wrangling.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-Data-Wrangling.ipynb) | Performs exploratory data analysis through data wrangling. |
 | [`SpaceX-EDA-SQL.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-EDA-SQL.ipynb)     | Explores data using SQL queries on a SQLite database.                                                   |
-| [`SpaceX-EDA-Viz.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-EDA-Viz.ipynb)          | Explore and prepare data through feature engineering.                                      |
+| [`SpaceX-EDA-Viz.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-EDA-Viz.ipynb)          | Explores and prepares data through feature engineering.                                      |
 | [`SpaceX-Launch-Site-Location.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-Launch-Site-Location.ipynb)          | Performs geospatial analysis and visualizes launch site locations.                                      |
-| [`SpaceX-Dash-App.py`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-Dash-App.py)                              | Dash application that provides an interactive dashboard for SpaceX launch analysis.                     |
+| [`SpaceX-Dash-App.py`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-Dash-App.py)                              | Provides an interactive dashboard for SpaceX launch analysis via Dash application.                     |
 | [`SpaceX-Machine-Learning-Prediction.ipynb`](https://github.com/juliasacca/Capstone-IBM-Data-Science-Program/blob/main_with_app/SpaceX-Machine-Learning-Prediction.ipynb)  | Builds and evaluates classification models (Logistic Regression, SVM, etc.) to predict landing success. |
 
 ### 🚀 Technologies Used
